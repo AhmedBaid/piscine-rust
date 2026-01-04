@@ -1,7 +1,7 @@
 use std::io;
 fn main() {
     let mut status = String::from("");
-    let mut count = 1;
+    let mut count = 0;
     loop {
         println!("I am the beginning of the end, and the end of time and space. I am essential to creation, and I surround every place. What am I?");
         count += 1;
@@ -13,6 +13,7 @@ fn main() {
             println!("Number of trials: {}", count);
             break;
         } else {
+            status = "".to_string();
             continue;
         }
     }
