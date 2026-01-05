@@ -1,5 +1,5 @@
 pub fn nbr_function(c: i32) -> (i32, f64, f64) {
-    (c, (c as f64).exp(), (c as f64).ln())
+    (c, (c as f64).exp(), (c.abs() as f64).ln())
 }
 
 pub fn str_function(a: String) -> (String, String) {
@@ -18,7 +18,7 @@ pub fn str_function(a: String) -> (String, String) {
 pub fn vec_function(b: Vec<i32>) -> (Vec<i32>, Vec<f64>) {
     let mut res: Vec<f64> = Vec::new();
     for ele in &b {
-        let f: f64 = (*ele as f64).ln();
+        let f: f64 = ((*ele).abs() as f64).ln();
         res.push(f);
     }
     (b, res)
