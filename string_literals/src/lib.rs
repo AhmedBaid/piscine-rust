@@ -15,8 +15,5 @@ pub fn split_at(v: &str, index: usize) -> (&str, &str) {
 }
 
 pub fn find(v: &str, pat: char) -> usize {
-    match v.find(pat) {
-        Some(i) => i,
-        None => 0,
-    }
+    v.find(pat).unwrap_or(0)
 }
