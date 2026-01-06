@@ -7,7 +7,7 @@ pub fn arrange_phrase(phrase: &str) -> String {
     for word in phrase.split_whitespace() {
         let digit: String = word.chars().filter(|c| c.is_digit(10)).collect();
         let nb: u32 = digit.parse().expect("Not a valid number!");
-        let filtered_string: String = (word.chars().filter(|c: &char| !c.is_numeric()).collect());
+        let filtered_string: String = word.chars().filter(|c: &char| !c.is_numeric()).collect();
         data.insert(nb, filtered_string);
     }
     for (key, _) in data.iter() {
