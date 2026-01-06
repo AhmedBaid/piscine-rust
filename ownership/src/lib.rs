@@ -1,4 +1,4 @@
-pub fn first_subword(mut s: String) -> String {
+pub fn first_subword(s: String) -> String {
     let mut res = String::new();
     for (index, rune) in s.chars().enumerate() {
         if index > 0 && (rune.is_uppercase() || rune == '_') {

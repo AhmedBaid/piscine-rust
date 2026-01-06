@@ -12,9 +12,24 @@ pub fn capitalize_first(input: &str) -> String {
 }
 
 pub fn title_case(input: &str) -> String {
-    let sl: Vec<String> = input.split_whitespace().map(|s| s.to_string()).collect();
-    let res: Vec<String> = sl.iter().map(|ele| capitalize_first(ele)).collect();
-    res.join(" ")
+    let mut res = String::new();
+    let mut new_word = true;
+
+    for ch in input.chars() {
+        if ch.is_whitespace() {
+            res.push(ch);
+            new_word = true;
+        } else {
+            if new_word {
+                res.push(ch.to_ascii_uppercase());
+                new_word = false;
+            } else {
+                res.push(ch.to_ascii_lowercase());
+            }
+        }
+    }
+
+    res
 }
 
 pub fn change_case(input: &str) -> String {
