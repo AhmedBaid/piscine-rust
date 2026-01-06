@@ -13,7 +13,7 @@ pub fn edit_distance(source: &str, target: &str) -> usize {
     for j in 0..=len_targ {
         matrix[0][j] = j;
     }
-    println!("{:?}",matrix);
+    println!("{:?}", matrix);
 
     for i in 1..=len_src {
         for j in 1..=len_targ {
