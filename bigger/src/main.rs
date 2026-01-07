@@ -14,4 +14,3 @@ fn main() {
         bigger(hash)
     );
 }
-//The biggest of the elements in the HashMap is 334
