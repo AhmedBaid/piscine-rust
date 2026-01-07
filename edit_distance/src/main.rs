@@ -11,3 +11,15 @@ fn main() {
         target
     );
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_distance() {
+        assert_eq!(edit_distance("gumbo", "gambol"), 2);
+        assert_eq!(edit_distance("kitten", "sitting"), 3);
+        assert_eq!(edit_distance("rosettacode", "raisethysword"), 8);
+    }
+}
