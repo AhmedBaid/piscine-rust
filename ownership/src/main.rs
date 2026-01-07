@@ -11,14 +11,3 @@ fn main() {
     println!("first_subword({}) = {}", s3, first_subword(s3.to_owned()));
     println!("first_subword({}) = {}", s4, first_subword(s4.to_owned()));
 }
-
-
-
-/*
-
-first_subword(helloWorld) = hello
-first_subword(snake_case) = snake
-first_subword(CamelCase) = Camel
-first_subword(just) = just
-
-*/
