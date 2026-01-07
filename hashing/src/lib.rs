@@ -15,7 +15,7 @@ pub fn median(list: &[i32]) -> i32 {
     }
     arr.sort();
     if arr.len() % 2 == 0 {
-        return arr[arr.len() / 2 - 1] + arr[arr.len() / 2];
+        return (arr[arr.len() / 2 - 1] + arr[arr.len() / 2]) / 2;
     } else {
         return *arr[arr.len() / 2];
     }
@@ -28,5 +28,7 @@ pub fn mode(list: &[i32]) -> i32 {
     }
 
     map.into_iter()
-        .max_by_key(|&(_,value)| value).map(|(key,_)| key).unwrap()
+        .max_by_key(|&(_, value)| value)
+        .map(|(key, _)| key)
+        .unwrap()
 }
