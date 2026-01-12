@@ -11,10 +11,12 @@ fn main() {
     );
     println!(
         "{:?}",
-        expected_variable("something", "something_completely_different").unwrap()
+        expected_variable("something", "something_completely_different")
     );
     println!(
         "{} close to it",
         expected_variable("BenedictCumberbatch", "BeneficialCucumbersnatch").unwrap()
     );
 }
+
+

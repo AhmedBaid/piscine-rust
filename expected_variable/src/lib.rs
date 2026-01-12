@@ -8,40 +8,46 @@ pub fn expected_variable(compared: &str, expected: &str) -> Option<String> {
         return None;
     }
 
+
     let distance = edit_distance(&compared_lower, &expected_lower);
 
+    let max_len = std::cmp::max(compared_lower.len(), expected_lower.len());
+    if max_len == 0 {
+        return Some("100%".to_string());
+    }
     let porc = 100 - (distance as isize * 100 / expected.len() as isize);
     if porc > 50 {
-        Some(format!("{}%", porc))
+        return Some(format!("{}%", porc));
     } else {
-        None
+        return None;
     }
 }
 
 pub fn edit_distance(source: &str, target: &str) -> usize {
-    let len_source = source.chars().count();
-    let len_target = target.chars().count();
+    let src: Vec<char> = source.chars().collect();
+    let targ: Vec<char> = target.chars().collect();
 
-    let mut table = vec![vec![0; len_target + 1]; len_source + 1];
+    let len_src = src.len();
+    let len_targ = targ.len();
 
-    for i in 0..=len_source {
-        table[i][0] = i;
+    let mut matrix = vec![vec![0; len_targ + 1]; len_src + 1];
+
+    for i in 0..=len_src {
+        matrix[i][0] = i;
     }
-    for i in 0..=len_target {
-        table[0][i] = i;
+    for j in 0..=len_targ {
+        matrix[0][j] = j;
     }
 
-    let source_chars: Vec<char> = source.chars().collect();
-    let target_chars: Vec<char> = target.chars().collect();
-
-    for i in 1..=len_source {
-        for j in 1..=len_target {
-            if source_chars[i - 1] == target_chars[j - 1] {
-                table[i][j] = table[i - 1][j - 1];
-            } else {
-                table[i][j] = 1 + table[i - 1][j - 1].min(table[i][j - 1].min(table[i - 1][j]));
-            }
+    for i in 1..=len_src {
+        for j in 1..=len_targ {
+            let cost = if src[i - 1] == targ[j - 1] { 0 } else { 1 };
+            let insert = matrix[i - 1][j] + 1;
+            let delate = matrix[i][j - 1] + 1;
+            let replace = matrix[i - 1][j - 1] + cost;
+            matrix[i][j] = std::cmp::min(std::cmp::min(insert, delate), replace);
         }
     }
-    table[len_source][len_target]
+
+    matrix[len_src][len_targ]
 }
