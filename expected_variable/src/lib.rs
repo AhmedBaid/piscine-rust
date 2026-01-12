@@ -1,14 +1,12 @@
-use convert_case::{Case, Casing};
-
+use convert_case::{ Case, Casing };
 pub fn expected_variable(compared: &str, expected: &str) -> Option<String> {
     let compared_lower = compared.to_lowercase();
     let expected_lower = expected.to_lowercase();
 
-    if !compared_lower.is_case(Case::Camel) && !expected_lower.is_case(Case::Snake) {
-        return None;
+    if compared_lower !=  compared_lower.to_case(Case::Camel) &&  compared_lower !=  compared_lower.to_case(Case::Snake) {
+        return  None;
+        
     }
-
-
     let distance = edit_distance(&compared_lower, &expected_lower);
 
     let max_len = std::cmp::max(compared_lower.len(), expected_lower.len());
