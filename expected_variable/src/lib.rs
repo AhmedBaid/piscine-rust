@@ -19,30 +19,29 @@ pub fn expected_variable(compared: &str, expected: &str) -> Option<String> {
 }
 
 pub fn edit_distance(source: &str, target: &str) -> usize {
-    let src: Vec<char> = source.chars().collect();
-    let targ: Vec<char> = target.chars().collect();
+    let len_source = source.chars().count();
+    let len_target = target.chars().count();
 
-    let len_src = src.len();
-    let len_targ = targ.len();
+    let mut table = vec![vec![0; len_target + 1]; len_source + 1];
 
-    let mut matrix = vec![vec![0; len_targ + 1]; len_src + 1];
-
-    for i in 0..=len_src {
-        matrix[i][0] = i;
+    for i in 0..=len_source {
+        table[i][0] = i;
     }
-    for j in 0..=len_targ {
-        matrix[0][j] = j;
+    for i in 0..=len_target {
+        table[0][i] = i;
     }
 
-    for i in 1..=len_src {
-        for j in 1..=len_targ {
-            let cost = if src[i - 1] == targ[j - 1] { 0 } else { 1 };
-            let insert = matrix[i - 1][j] + 1;
-            let delate = matrix[i][j - 1] + 1;
-            let replace = matrix[i - 1][j - 1] + cost;
-            matrix[i][j] = std::cmp::min(std::cmp::min(insert, delate), replace);
+    let source_chars: Vec<char> = source.chars().collect();
+    let target_chars: Vec<char> = target.chars().collect();
+
+    for i in 1..=len_source {
+        for j in 1..=len_target {
+            if source_chars[i - 1] == target_chars[j - 1] {
+                table[i][j] = table[i - 1][j - 1];
+            } else {
+                table[i][j] = 1 + table[i - 1][j - 1].min(table[i][j - 1].min(table[i - 1][j]));
+            }
         }
     }
-
-    matrix[len_src][len_targ]
+    table[len_source][len_target]
 }
