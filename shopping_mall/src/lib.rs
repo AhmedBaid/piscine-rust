@@ -32,8 +32,8 @@ pub fn highest_paid_employee(mall: &Mall) -> Vec<(&String, &Employee)> {
     }
     highest
 }
-pub fn nbr_of_employees(mall: &Mall) -> i32 {
-    let mut number_employee: i32 = 0;
+pub fn nbr_of_employees(mall: &Mall) -> usize {
+    let mut number_employee: usize = 0;
     for floor in mall.floors.clone() {
         for store in floor.1.stores.clone() {
             for _ in store.1.employees {
