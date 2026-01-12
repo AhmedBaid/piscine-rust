@@ -22,7 +22,6 @@ pub fn highest_paid_employee(mall: &Mall) -> Vec<(&String, &Employee)> {
                     highest.clear();
                     highest.push((&s.0, &s.1));
                 } else if !highest.is_empty() && s.1.salary == highest[0].1.salary {
-                    highest.clear();
                     highest.push((&s.0, &s.1));
                 } else if highest.is_empty() {
                     highest.push((&s.0, &s.1));
@@ -58,10 +57,8 @@ pub fn check_for_securities(mall: &mut Mall, guards: HashMap<String, Guard>) {
     let current_guards = mall.guards.len();
 
     if current_guards < required_guards {
-        for (name, guard) in guards.into_iter() {
-            if mall.guards.len() >= required_guards {
-                break;
-            }
+        let add_guard = required_guards - current_guards;
+        for (name, guard) in guards.into_iter().take(add_guard) {
             mall.hire_guard(name, guard);
         }
     }
