@@ -48,9 +48,7 @@ pub fn nbr_of_employees(mall: &Mall) -> usize {
 pub fn check_for_securities(mall: &mut Mall, guards: HashMap<String, Guard>) {
     let mut total_area: u64 = 0;
     for floor in mall.floors.clone() {
-        for (_, store) in floor.1.stores.clone() {
-            total_area += store.square_meters;
-        }
+        total_area += floor.1.size_limit;
     }
     let required_guards = (total_area / 200) as usize;
 
