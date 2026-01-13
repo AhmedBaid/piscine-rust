@@ -5,7 +5,6 @@ pub fn expected_variable(compared: &str, expected: &str) -> Option<String> {
 
     if compared_lower !=  compared_lower.to_case(Case::Camel) &&  compared_lower !=  compared_lower.to_case(Case::Snake) {
         return  None;
-        
     }
     let distance = edit_distance(&compared_lower, &expected_lower);
 
