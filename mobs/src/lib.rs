@@ -71,4 +71,11 @@ impl Mob {
         self.wealth += stolen;
     }
 
+    pub fn conquer_city(&mut self, other_mobs: &[&Mob], city_name: String) {
+        let city_taken = other_mobs.iter().any(|mob| mob.cities.contains(&city_name));
+
+        if !city_taken {
+            self.cities.insert(city_name);
+        }
+    }
 }
