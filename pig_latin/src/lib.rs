@@ -6,8 +6,8 @@ pub fn pig_latin(text: &str) -> String {
         return format!("{}ay", text);
     }
     if  arr[1] == 'q' && arr[2] == 'u' && !vowels.contains(arr[0]) {
-        let rest: String = arr[2..].iter().collect();
-        return  format!("{}quay", rest);
+        let rest: String = arr[3..].iter().collect();
+        return  format!("{}squay", rest);
     }
     for (index, _) in arr.iter().enumerate() {
         if index != 0 && vowels.contains(arr[index]) {
