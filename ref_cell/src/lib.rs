@@ -13,7 +13,7 @@ impl Tracker {
             max,
         }
     }
-    pub fn set_value<T>(&mut self, value: &Rc<T>) {
+    pub fn set_value<T>(&self, value: &Rc<T>) {
         if Rc::strong_count(value) > self.max {
             self.messages
                 .borrow_mut()
@@ -25,9 +25,9 @@ impl Tracker {
             ));
         }
     }
-    pub fn peek<T>(&mut self, value: &Rc<T>) {
+    pub fn peek<T>(&self, value: &Rc<T>) {
         self.messages.borrow_mut().push(format!(
-            "Info: You have used {}% of your quota.",
+            "Info: This value would use {}% of your quota",
             Rc::strong_count(value) * 100 / self.max
         ));
     }
