@@ -5,6 +5,8 @@ pub fn parse_into_boxed(s: String) -> Vec<Box<u32>> {
             let nb: f64 = ele[0..ele.len() - 1].parse().unwrap();
             let mult = (nb * 1000.0) as u32;
             arr.push(Box::new(mult));
+        }else{
+            arr.push(Box::new(ele.parse().unwrap()));
         }
     }
     arr
