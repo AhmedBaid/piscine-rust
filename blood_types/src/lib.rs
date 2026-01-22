@@ -9,7 +9,7 @@ pub enum Antigen {
 }
 
 #[derive(PartialEq, Eq, Hash, Clone, Copy)]
-enum RhFactor {
+pub enum RhFactor {
     Positive,
     Negative,
 }
