@@ -1,3 +1,5 @@
+use std::collections::BTreeMap;
+
 use crate::RomanDigit::*;
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
@@ -22,27 +24,28 @@ impl From<u32> for RomanNumber {
             _ => {
                 let mut num = value;
                 let mut digits = Vec::new();
+                let roman_nums = BTreeMap::from([
+                    (1000, [M].to_vec()),
+                    (900, [C, M].to_vec()),
+                    (500, [D].to_vec()),
+                    (400, [C, D].to_vec()),
+                    (100, [C].to_vec()),
+                    (90, [X, C].to_vec()),
+                    (50, [L].to_vec()),
+                    (40, [X, L].to_vec()),
+                    (10, [X].to_vec()),
+                    (9, [I, X].to_vec()),
+                    (5, [V].to_vec()),
+                    (4, [I, V].to_vec()),
+                    (1, [I].to_vec()),
+                ]);
 
-                let roman_numerals = [
-                    (1000, M),
-                    (900, C),
-                    (500, D),
-                    (400, C),
-                    (100, C),
-                    (90, X),
-                    (50, L),
-                    (40, X),
-                    (10, X),
-                    (9, I),
-                    (5, V),
-                    (4, I),
-                    (1, I),
-                ];
-
-                for &(val, digit) in roman_numerals.iter() {
-                    while num >= val {
-                        digits.push(digit);
-                        num -= val;
+                for (val, digit) in roman_nums.iter().rev() {
+                    while num >= *val {
+                        for d in digit {
+                            digits.push(*d);
+                        }
+                        num -= *val;
                     }
                 }
 

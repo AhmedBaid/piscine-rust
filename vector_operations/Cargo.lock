@@ -3,5 +3,5 @@
 version = 4
 
 [[package]]
-name = "vector-operations"
+name = "vector_operations"
 version = "0.1.0"
