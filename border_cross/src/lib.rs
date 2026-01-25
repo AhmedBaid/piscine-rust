@@ -41,5 +41,9 @@ impl Vehicle for Car<'_> {
 }
 
 pub fn all_models<'a, const N: usize>(list: [&'a dyn Vehicle; N]) -> [&'a str; N] {
-    std::array::from_fn(|i| list[i].model())
+    let mut models: [&'a str; N] = [""; N];
+    for (i, l) in list.iter().enumerate() {
+        models[i] = l.model();
+    }
+    models
 }
