@@ -1,5 +1,4 @@
 use matrix::*;
-
 fn main() {
     let m = Matrix([[0; 4]; 3]);
     println!("{:?}", m);
