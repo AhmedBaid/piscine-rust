@@ -25,7 +25,7 @@ impl<T: Copy> Matrix<T> {
 }
 
 impl<T: Scalar<Item = T> + Copy + Mul<Output = T> + Add<Output = T>> Mul for Matrix<T> {
-    type Output = Option<Vec<Vec<T>>>;
+    type Output = Option<Matrix<T>>;
     fn mul(self, matrix2: Self) -> Self::Output {
         let mut res = vec![vec![T::zero(); matrix2.number_of_cols()]; self.number_of_rows()];
         for i in 0..self.number_of_rows() {
@@ -36,6 +36,6 @@ impl<T: Scalar<Item = T> + Copy + Mul<Output = T> + Add<Output = T>> Mul for Mat
             }
         }
 
-        Some(res)
+        Some(Matrix(res))
     }
 }
