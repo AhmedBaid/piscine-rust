@@ -59,7 +59,7 @@ impl Event<'_> {
             _ => Notification {
                 size: 25,
                 color: (0, 255, 0),
-                position: Position::Center,
+                position: Position::Top,
                 content: "Enjoy your holiday".to_string(),
             },
         }
