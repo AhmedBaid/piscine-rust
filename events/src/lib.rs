@@ -28,7 +28,7 @@ impl fmt::Display for Notification {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         let (c1, c2, c3) = self.color;
         let content = self.content.truecolor(c1, c2, c3);
-        writeln!(f, "({:?}, {}, {})", self.position, self.size, content)
+        write!(f, "({:?}, {}, {})", self.position, self.size, content)
     }
 }
 
