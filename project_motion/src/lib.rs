@@ -25,26 +25,38 @@ impl ThrowObject {
     }
 }
 
+fn round1(x: f32) -> f32 {
+    (x * 10.0).round() / 10.0
+}
+
 impl Iterator for ThrowObject {
     type Item = ThrowObject;
 
     fn next(&mut self) -> Option<Self::Item> {
-        if self.actual_position.y <= 0.0 {
-            return None;
-        }
         self.time += 1.0;
-        let g = 9.8;
-        let t = self.time;
+
+        let g: f32 = 9.8;
+        let t: f32 = self.time;
+
         let vx = self.init_velocity.x;
         let vy = self.init_velocity.y - g * t;
+
         let x = self.init_position.x + self.init_velocity.x * t;
         let y = self.init_position.y + self.init_velocity.y * t - 0.5 * g * t * t;
-        self.actual_velocity = Object { x: vx, y: vy };
-        self.actual_position = Object { x, y };
+
+        self.actual_velocity = Object {
+            x: round1(vx),
+            y: round1(vy),
+        };
+        self.actual_position = Object {
+            x: round1(x),
+            y: round1(y),
+        };
 
         if self.actual_position.y <= 0.0 {
             return None;
         }
+
         Some(self.clone())
     }
 }
